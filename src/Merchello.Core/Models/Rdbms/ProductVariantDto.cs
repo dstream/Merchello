@@ -201,9 +201,9 @@
         public DateTime CreateDate { get; set; }
 
         /// <summary>
-        /// 
+        /// only for get products from collection
         /// </summary>
-        [Column("sort")]
+        [ResultColumn]
         [Constraint(Default = 0)]
         public int Sort { get; set; }
 

@@ -216,6 +216,38 @@
             SortDirection sortDirection = SortDirection.Descending);
 
         /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="collectionKey"></param>
+        /// <param name="page"></param>
+        /// <param name="itemsPerPage"></param>
+        /// <param name="orderExpression"></param>
+        /// <param name="sortDirection"></param>
+        /// <returns></returns>
+        Page<KeyValuePair<Guid,int>> GetKeyandSortOrdersFromCollection(
+            Guid collectionKey,
+            long page,
+            long itemsPerPage,
+            string orderExpression,
+            SortDirection sortDirection = SortDirection.Descending);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="collectionKeys"></param>
+        /// <param name="page"></param>
+        /// <param name="itemsPerPage"></param>
+        /// <param name="orderExpression"></param>
+        /// <param name="sortDirection"></param>
+        /// <returns></returns>
+        Page<KeyValuePair<Guid, int>> GetKeyandSortOrdersFromCollection(
+            Guid[] collectionKeys,
+            long page,
+            long itemsPerPage,
+            string orderExpression,
+            SortDirection sortDirection = SortDirection.Descending);
+
+        /// <summary>
         /// The get entity keys from collection.
         /// </summary>
         /// <param name="collectionKey">

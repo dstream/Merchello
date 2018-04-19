@@ -367,21 +367,7 @@
             {
                 return this._properties.Value[this.CultureName].ToArray();
             }
-        }
-
-        /// <summary>
-        /// Gets the sort order.
-        /// </summary>
-        /// <remarks>
-        /// Defaults to 0
-        /// </remarks>
-        public override int SortOrder
-        {
-            get
-            {
-                return 0;
-            }
-        }
+        }        
 
         /// <summary>
         /// Gets the url name.

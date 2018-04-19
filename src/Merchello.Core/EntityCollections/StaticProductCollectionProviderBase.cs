@@ -99,6 +99,24 @@
         }
 
         /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="page"></param>
+        /// <param name="itemsPerPage"></param>
+        /// <param name="sortBy"></param>
+        /// <param name="sortDirection"></param>
+        /// <returns></returns>
+        protected override Page<KeyValuePair<Guid, int>> PerformGetPagedEntityKeyandSortOrders(long page, long itemsPerPage, string sortBy = "", SortDirection sortDirection = SortDirection.Ascending)
+        {
+            return ((ProductService)this.MerchelloContext.Services.ProductService).GetKeyandSortOrdersFromCollection(
+                this.CollectionKey,
+                page,
+                itemsPerPage,
+                sortBy,
+                sortDirection);
+        }
+
+        /// <summary>
         /// Gets paged entity keys in the collection
         /// </summary>
         /// <param name="args">

@@ -253,7 +253,7 @@
             SortDirection direction = SortDirection.Ascending)
         {
 
-            var sql = BuildAdvancedProductSearchSql(term, includeFields);
+            var sql = BuildAdvancedProductSearchSql(term, includeFields, collectionKey);
             if (includeFields.Contains("manufacturer") && !manufacturer.IsNullOrWhiteSpace())
             {
                 sql.Where<ProductVariantDto>(x => x.Manufacturer == manufacturer, SqlSyntax);
@@ -261,13 +261,7 @@
 
             if (!collectionKey.Equals(Guid.Empty))
             {
-                sql.Append("AND [merchProductVariant].[productKey] IN (")
-                .Append("SELECT DISTINCT([productKey])")
-                .Append("FROM [merchProduct2EntityCollection]")
-                .Append(
-                    "WHERE [merchProduct2EntityCollection].[entityCollectionKey] = @eckey",
-                    new { @eckey = collectionKey })
-                .Append(")");
+                sql.Where("[entityCollectionKey] = @eckey", new { @eckey = collectionKey });
             }
 
             if (!string.IsNullOrEmpty(orderExpression))
@@ -285,6 +279,15 @@
                                ? GetAll(results.Items.Select(x => x.ProductKey).ToArray())
                                : Enumerable.Empty<IProduct>();
 
+            //merge sort order
+            foreach(IProduct item in products)
+            {
+                var productDTo = results.Items.FirstOrDefault(x => x.ProductKey == item.Key);
+                if (productDTo != null)
+                {
+                    item.Sort = productDTo.Sort;
+                }
+            }
 
             return new PagedCollection<IProduct>
             {
@@ -297,7 +300,7 @@
             };
         }
 
-        private Sql BuildAdvancedProductSearchSql(string searchTerm, string[] includeFields)
+        private Sql BuildAdvancedProductSearchSql(string searchTerm, string[] includeFields, Guid collectionKey)
         {
             searchTerm = searchTerm.Replace(",", " ");
             var invidualTerms = searchTerm.Split(' ');
@@ -307,7 +310,14 @@
             var validFields = ValidSearchFields.Where(includeFields.Contains).ToArray();
 
             var sql = new Sql();
-            sql.Select("*").From<ProductVariantDto>(SqlSyntax);
+            if (!collectionKey.Equals(Guid.Empty))
+            {
+                sql.Append("SELECT P.*, C.Sort from merchProductVariant as P INNER JOIN merchProduct2EntityCollection as C ON P.[productKey] = C.[productKey]");                
+            }
+            else
+            {
+                sql.Select("*").From<ProductVariantDto>(SqlSyntax);
+            }
 
             if (terms.Any())
             {
@@ -323,7 +333,7 @@
                 sql.Where(fieldSql, new { @prepped = preparedTerms });
             }
 
-            sql.Where("master = @master", new { @master = true });
+            sql.Where("[master] = @master", new { @master = true });
 
             return sql;
         }

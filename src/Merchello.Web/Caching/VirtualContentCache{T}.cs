@@ -164,6 +164,26 @@
             };
         }
 
+        public virtual PagedCollection<TContent> MapPagedCollection(Page<KeyValuePair<Guid,int>> page, string sortBy)
+        {
+            var items = page.Items.Select(x=>x.Key).Select(GetByKey).Where(x => x != null).ToArray();
+
+            if (items.Count() != page.Items.Count)
+            {
+                MultiLogHelper.Debug<VirtualContentCache<TContent, TEntity>>("Could not map all items to virtual content");
+            }
+
+            return new PagedCollection<TContent>
+            {
+                CurrentPage = page.CurrentPage,
+                PageSize = items.Count(),
+                TotalPages = page.TotalPages,
+                TotalItems = page.TotalItems,
+                Items = items,
+                SortField = sortBy
+            };
+        }
+
         /// <summary>
         /// Clears the runtime cache of IPublishedContent.
         /// </summary>

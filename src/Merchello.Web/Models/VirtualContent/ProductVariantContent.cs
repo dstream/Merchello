@@ -201,5 +201,14 @@
                 return _variant;
             }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public override int SortOrder {
+            get {
+                return _parent != null? _parent.SortOrder: 0;
+            }
+        }
     }
 }

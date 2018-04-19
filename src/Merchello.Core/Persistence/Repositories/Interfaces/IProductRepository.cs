@@ -44,6 +44,12 @@
         /// <returns>A value indicating whether or not a SKU is already exists in the database</returns>
         bool SkuExists(string sku);
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="collectionKey"></param>
+        /// <param name="products"></param>
+        void SaveCollectionSortOrder(Guid collectionKey, IEnumerable<IProduct> products);
 
         #region Filter Queries
 

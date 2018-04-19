@@ -136,7 +136,12 @@
         /// <summary>
         /// The detached content collection.
         /// </summary>
-        private DetachedContentCollection<IProductVariantDetachedContent> _detachedContents; 
+        private DetachedContentCollection<IProductVariantDetachedContent> _detachedContents;
+
+        /// <summary>
+        /// sort order in a collection
+        /// </summary>
+        private int _sort;
 
         #endregion
 
@@ -550,7 +555,7 @@
                 _catalogInventoryCollection = value;
                 _catalogInventoryCollection.CollectionChanged += CatalogInventoryCollectionChanged;
             }
-        }
+        }        
 
         /// <summary>
         /// Handles the catalog inventory collection changed.

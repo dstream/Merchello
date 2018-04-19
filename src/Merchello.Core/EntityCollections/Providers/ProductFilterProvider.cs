@@ -1,6 +1,9 @@
 ﻿namespace Merchello.Core.EntityCollections.Providers
 {
     using System;
+    using System.Collections.Generic;
+    using Merchello.Core.Persistence.Querying;
+    using Umbraco.Core.Persistence;
 
     /// <summary>
     /// Represents the product based filter collection.
@@ -23,6 +26,11 @@
         public ProductFilterGroupProvider(IMerchelloContext merchelloContext, Guid collectionKey)
             : base(merchelloContext, collectionKey)
         {
+        }
+
+        protected override Page<KeyValuePair<Guid, int>> PerformGetPagedEntityKeyandSortOrders(long page, long itemsPerPage, string sortBy = "", SortDirection sortDirection = SortDirection.Ascending)
+        {
+            throw new NotImplementedException();
         }
     }
 }

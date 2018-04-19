@@ -838,7 +838,8 @@
                               ProductKey = entityKey,
                               EntityCollectionKey = collectionKey,
                               CreateDate = DateTime.Now,
-                              UpdateDate = DateTime.Now
+                              UpdateDate = DateTime.Now,
+                              Sort = 0
                           };
 
             Database.Insert(dto);
@@ -866,12 +867,24 @@
                         ProductKey = entityAndCollectionKey.Key,
                         EntityCollectionKey = entityAndCollectionKey.Value,
                         CreateDate = DateTime.Now,
-                        UpdateDate = DateTime.Now
+                        UpdateDate = DateTime.Now,
+                        Sort = 0
                     });
                 }               
             }
 
             Database.BulkInsertRecords(dtos);
+        }
+
+        public void SaveCollectionSortOrder(Guid collectionKey, IEnumerable<IProduct> products)
+        {                        
+            foreach (var entity in products)
+            {
+                var sql = new Sql("Update merchProduct2EntityCollection set [Sort] = @sort", new { @sort = entity.Sort })
+                .Where("[entityCollectionKey] = @colKey", new { @colKey = collectionKey })
+                .Where("[productKey] = @pKey", new { @pKey = entity.Key });
+                Database.Execute(sql);
+            }
         }
 
         /// <summary>
@@ -974,6 +987,42 @@
                .Append("AND [merchProductVariant].[master] = 1");
 
             var pagedKeys = GetPagedKeys(page, itemsPerPage, sql, orderExpression, sortDirection);
+
+            return pagedKeys;
+        }
+
+        public Page<KeyValuePair<Guid,int>> GetKeyandSortOrdersFromCollection(
+            Guid collectionKey,
+            long page,
+            long itemsPerPage,
+            string orderExpression,
+            SortDirection sortDirection = SortDirection.Descending)
+        {
+
+            var sql = new Sql();
+            sql.Append("SELECT P.*, C.[Sort] from [merchProductVariant] as P")
+              .Append("inner join [merchProduct2EntityCollection] as C on P.[productKey] = C.productKey")
+              .Append("WHERE P.master = 1 and C.[entityCollectionKey] = @eckey", new { @eckey = collectionKey });
+
+            var pagedKeys = GetPagedKeyandSortOrders(page, itemsPerPage, sql, orderExpression, sortDirection);
+
+            return pagedKeys;
+        }
+
+        public Page<KeyValuePair<Guid, int>> GetKeyandSortOrdersFromCollection(
+            Guid[] collectionKeys,
+            long page,
+            long itemsPerPage,
+            string orderExpression,
+            SortDirection sortDirection = SortDirection.Descending)
+        {
+
+            var sql = new Sql();
+            sql.Append("SELECT P.*, C.[Sort] from [merchProductVariant] as P")
+              .Append("inner join [merchProduct2EntityCollection] as C on P.[productKey] = C.productKey")
+              .Append("WHERE P.master = 1 and C.[entityCollectionKey] IN (@eckeys)", new { @eckeys = collectionKeys });
+
+            var pagedKeys = GetPagedKeyandSortOrders(page, itemsPerPage, sql, orderExpression, sortDirection);
 
             return pagedKeys;
         }
@@ -1594,6 +1643,20 @@
                 TotalItems = p.TotalItems,
                 TotalPages = p.TotalPages,
                 Items = p.Items.Select(x => x.ProductKey).ToList()
+            };
+        }
+
+        protected Page<KeyValuePair<Guid,int>> GetPagedKeyandSortOrders(long page, long itemsPerPage, Sql sql, string orderExpression, SortDirection sortDirection = SortDirection.Descending)
+        {
+            var p = GetDtoPage(page, itemsPerPage, sql, orderExpression, sortDirection);
+
+            return new Page<KeyValuePair<Guid, int>>()
+            {
+                CurrentPage = p.CurrentPage,
+                ItemsPerPage = p.ItemsPerPage,
+                TotalItems = p.TotalItems,
+                TotalPages = p.TotalPages,
+                Items = p.Items.Select(x => new KeyValuePair<Guid,int>(x.ProductKey, x.Sort)).ToList()
             };
         }
 

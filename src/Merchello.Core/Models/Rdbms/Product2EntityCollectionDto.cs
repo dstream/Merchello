@@ -41,5 +41,9 @@
         [Column("createDate")]
         [Constraint(Default = "getdate()")]
         public DateTime CreateDate { get; set; }
+
+        [Column("sort")]
+        [Constraint(Default = 0)]
+        public int Sort { get; set; }
     }
 }

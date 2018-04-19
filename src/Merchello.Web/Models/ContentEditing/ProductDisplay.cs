@@ -73,6 +73,11 @@
         public IEnumerable<ProductVariantDisplay> ProductVariants { get; set; }
 
         /// <summary>
+        /// Sort order in a collection
+        /// </summary>
+        public int Sort { get; set; }
+
+        /// <summary>
         /// Gets the total inventory count.
         /// </summary>
         public override int TotalInventoryCount

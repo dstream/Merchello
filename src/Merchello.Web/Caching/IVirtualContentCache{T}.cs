@@ -62,6 +62,14 @@
         PagedCollection<TContent> MapPagedCollection(Page<Guid> page, string sortBy);
 
         /// <summary>
+        /// Maps a page of keys, sort orders to a PagedCollection{TContent} with sort order in collection if had 
+        /// </summary>
+        /// <param name="page"></param>
+        /// <param name="sortBy"></param>
+        /// <returns></returns>
+        PagedCollection<TContent> MapPagedCollection(Page<KeyValuePair<Guid, int>> page, string sortBy);
+
+        /// <summary>
         /// Clears the runtime cache of IPublishedContent.
         /// </summary>
         /// <param name="e">

@@ -201,6 +201,13 @@
         public DateTime CreateDate { get; set; }
 
         /// <summary>
+        /// 
+        /// </summary>
+        [Column("sort")]
+        [Constraint(Default = 0)]
+        public int Sort { get; set; }
+
+        /// <summary>
         /// Gets or sets the product variant index dto.
         /// </summary>
         [ResultColumn]

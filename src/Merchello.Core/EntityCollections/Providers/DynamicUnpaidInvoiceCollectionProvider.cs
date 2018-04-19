@@ -79,6 +79,11 @@
             return _invoiceService.GetPageFromKeyPage(keyPage, () => _invoiceService.GetByKeys(keyPage.Items));
         }
 
+        protected override Page<KeyValuePair<Guid, int>> PerformGetPagedEntityKeyandSortOrders(long page, long itemsPerPage, string sortBy = "", SortDirection sortDirection = SortDirection.Ascending)
+        {
+            throw new NotImplementedException();
+        }
+
         /// <summary>
         /// Gets a page of keys associated with invoices with an unpaid status
         /// </summary>

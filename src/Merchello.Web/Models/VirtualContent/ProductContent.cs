@@ -66,7 +66,7 @@
         public ProductContent(
             PublishedContentType contentType,
             IDictionary<Guid, PublishedContentType> optionContentTypes,
-            ProductDisplay display,           
+            ProductDisplay display,
             IPublishedContent parent = null,
             string specificCulture = "en-US",
             bool isPreviewing = false)
@@ -99,7 +99,7 @@
             {
                 return _display.ProductVariantKey;
             }
-        }      
+        }
 
         /// <summary>
         /// Gets the path.
@@ -124,6 +124,20 @@
             get
             {
                 return this._display.Name;
+            }
+        }
+
+        /// <summary>
+        /// Gets the sort order.
+        /// </summary>
+        /// <remarks>
+        /// Defaults to 0
+        /// </remarks>
+        public override int SortOrder
+        {
+            get
+            {
+                return _display.Sort;
             }
         }
 
@@ -161,6 +175,8 @@
                 return _varaintContent;
             }
         }
+
+        public int Sort {get; set;}
 
         /// <summary>
         /// Gets the total inventory count.

@@ -76,8 +76,9 @@
                 var key = new Guid(collectionKey);
 
                 var query = merchello.ProductContentQuery().Page(1).ItemsPerPage(long.MaxValue).ConstrainByCollectionKey(key);
-
-                return new ProductContentListView(key, query.Execute().Items);
+                var items = query.Execute().Items;
+                items = items.OrderBy(p => p.Sort).ToList();
+                return new ProductContentListView(key, items);
             }
             catch (Exception ex)
             {

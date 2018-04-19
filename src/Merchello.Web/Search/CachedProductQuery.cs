@@ -502,9 +502,27 @@
 
             if (!keys.Any()) return PagedCollection<IProductContent>.Empty();
 
-            var pagedKeys = ((ProductService)Service).GetKeysThatExistInAllCollections(keys, page, itemsPerPage, sortBy, sortDirection);
+            var productkeyandSortorders = ((ProductService)Service).GetKeyandSortOrdersFromCollection(keys, page, itemsPerPage, sortBy, sortDirection);
 
-            return _cache.MapPagedCollection(pagedKeys, sortBy);
+            var result = _cache.MapPagedCollection(new Umbraco.Core.Persistence.Page<Guid> {
+                Items = productkeyandSortorders.Items.Select(x => x.Key).ToList(),
+                Context = productkeyandSortorders.Context,
+                CurrentPage = productkeyandSortorders.CurrentPage,
+                ItemsPerPage = productkeyandSortorders.ItemsPerPage,
+                TotalItems = productkeyandSortorders.TotalItems,
+                TotalPages = productkeyandSortorders.TotalPages
+            }, sortBy);
+            
+            var items = new List<IProductContent>();
+            //inject sort order
+            foreach (var item in result.Items)
+            {
+                item.Sort = productkeyandSortorders.Items.First(x => x.Key == item.Key).Value;
+                items.Add(item);
+            }
+            result.Items = items;
+
+            return result;
         }
 
         /// <summary>
@@ -1820,6 +1838,37 @@
             var display = GetBySlug(slug);
             return display == null ? null :
                 display.AsProductContent(_productContentFactory.Value);
+        }
+
+        public override QueryResultDisplay GetFromCollection(
+            Guid collectionKey,
+            long page,
+            long itemsPerPage,
+            string sortBy = "",
+            SortDirection sortDirection = SortDirection.Ascending)
+        {
+
+            var productkeyandSortorders = GetCollectionPagedKeyandSortOrders(collectionKey, page, itemsPerPage, sortBy, sortDirection);
+
+            var result = this.GetQueryResultDisplay(new Umbraco.Core.Persistence.Page<Guid>
+            {
+                Context = productkeyandSortorders.Context,
+                CurrentPage = productkeyandSortorders.CurrentPage,
+                ItemsPerPage = productkeyandSortorders.ItemsPerPage,
+                TotalItems = productkeyandSortorders.TotalItems,
+                TotalPages = productkeyandSortorders.TotalPages,
+                Items = productkeyandSortorders.Items.Select(x => x.Key).ToList()
+            });
+
+            var items = new List<ProductDisplay>();
+            //inject sort order
+            foreach(ProductDisplay item in result.Items)
+            {
+                item.Sort = productkeyandSortorders.Items.First(x => x.Key == item.Key).Value;
+                items.Add(item);                                
+            }
+            result.Items = items;
+            return result;
         }
 
         /// <summary>

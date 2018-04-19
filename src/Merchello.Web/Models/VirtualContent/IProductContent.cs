@@ -23,6 +23,11 @@
         Guid ProductVariantKey { get; }
 
         /// <summary>
+        /// Collection sort order
+        /// </summary>
+        int Sort { get; set; }
+
+        /// <summary>
         /// Gets the product options.
         /// </summary>
         [Obsolete("Use Options property")]

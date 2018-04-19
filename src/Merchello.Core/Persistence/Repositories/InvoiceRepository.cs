@@ -1811,5 +1811,15 @@
 
             return collection;   
         }
+
+        public Page<KeyValuePair<Guid, int>> GetKeyandSortOrdersFromCollection(Guid collectionKey, long page, long itemsPerPage, string orderExpression, SortDirection sortDirection = SortDirection.Descending)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Page<KeyValuePair<Guid, int>> GetKeyandSortOrdersFromCollection(Guid[] collectionKeys, long page, long itemsPerPage, string orderExpression, SortDirection sortDirection = SortDirection.Descending)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

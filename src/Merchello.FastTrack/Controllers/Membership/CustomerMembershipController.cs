@@ -95,7 +95,12 @@
         [ValidateAntiForgeryToken]
         public virtual ActionResult Login(LoginModel model)
         {
-            if (!ModelState.IsValid) return CurrentUmbracoPage();
+            if (!ModelState.IsValid)
+            {
+                var viewData = new StoreViewData { Success = false, Messages = GetErrorMessage(ModelState) };
+                ViewData["MerchelloViewData"] = viewData;
+                return CurrentUmbracoPage();
+            }
 
             if (!Members.Login(model.Username, model.Password))
             {
@@ -141,7 +146,12 @@
         [ValidateAntiForgeryToken]
         public virtual ActionResult Register(NewMemberModel model)
         {
-            if (!ModelState.IsValid) return CurrentUmbracoPage();
+            if (!ModelState.IsValid)
+            {
+                var viewData = new StoreViewData { Success = false, Messages = GetErrorMessage(ModelState) };
+                ViewData["MerchelloViewData"] = viewData;
+                return CurrentUmbracoPage();
+            }
 
             var logData = new ExtendedLoggerData();
             logData.AddCategory("Merchello");
@@ -442,5 +452,18 @@
 			var model = new ForgotPasswordModel();
 			return view.IsNullOrWhiteSpace() ? PartialView(model) : PartialView(view, model);
 		}
-	}
+
+        private List<string> GetErrorMessage(ModelStateDictionary modelState)
+        {
+            var errors = new List<string>();
+            foreach (ModelState m in modelState.Values)
+            {
+                foreach (ModelError error in m.Errors)
+                {
+                    errors.Add(error.ErrorMessage); 
+                }
+            }
+            return errors;
+        }
+    }
 }

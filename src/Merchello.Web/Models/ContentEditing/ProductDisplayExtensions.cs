@@ -72,6 +72,7 @@
             destination.Shippable = productDisplay.Shippable;
             destination.Download = productDisplay.Download;
             destination.DownloadMediaId = productDisplay.DownloadMediaId;
+            destination.Sort = productDisplay.Sort;
 
             // We need to refactor the CatalogInventories to not be immutable if we are
             // going to need to do operations like this.  In the UI, the user "unchecks" a catalog that was

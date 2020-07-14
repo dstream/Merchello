@@ -38,5 +38,10 @@
         /// Gets a value indicating whether this represents the master product variant.
         /// </summary>
         bool Master { get; }
+
+        /// <summary>
+        /// Sort order in a collection
+        /// </summary>
+        int Sort { get; set; }
     }
 }

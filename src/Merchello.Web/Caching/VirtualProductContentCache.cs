@@ -64,7 +64,7 @@
         public VirtualProductContentCache(CacheHelper cache, Func<Guid, IProductContent> fetch, bool modified)
             : base(cache, fetch, modified)
         {
-        }
+        }        
 
         /// <summary>
         /// Gets <see cref="IPublishedContent"/> by it's slug.

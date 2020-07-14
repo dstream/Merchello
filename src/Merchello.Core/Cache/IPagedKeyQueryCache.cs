@@ -27,6 +27,15 @@
         Page<Guid> CachePage(string cacheKey, Page<Guid> p);
 
         /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="cacheKey"></param>
+        /// <param name="p"></param>
+        /// <returns></returns>
+        Page<T> CachePage<T>(string cacheKey, Page<T> p);
+
+        /// <summary>
         /// Gets a page by it's cache key.
         /// </summary>
         /// <param name="cacheKey">
@@ -36,6 +45,9 @@
         /// The <see cref="Page{Guid}"/>.
         /// </returns>
         Page<Guid> GetPageByCacheKey(string cacheKey);
+
+        ///
+        Page<T> GetPageByCacheKey<T>(string cacheKey);
 
         /// <summary>
         /// Gets a cache key for storing paged collection query results.

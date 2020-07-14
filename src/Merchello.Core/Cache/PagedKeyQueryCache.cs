@@ -52,6 +52,20 @@
         }
 
         /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="cacheKey"></param>
+        /// <param name="p"></param>
+        /// <returns></returns>
+        public Page<T> CachePage<T>(string cacheKey, Page<T> p)
+        {
+            if (p == null) return default(Page<T>);
+
+            return (Page<T>)this._cache.GetCacheItem(cacheKey, () => p);
+        }
+
+        /// <summary>
         /// Gets a page by it's cache key.
         /// </summary>
         /// <param name="cacheKey">
@@ -63,6 +77,11 @@
         public Page<Guid> GetPageByCacheKey(string cacheKey)
         {
             return (Page<Guid>)this._cache.GetCacheItem(cacheKey);
+        }
+
+        public Page<T> GetPageByCacheKey<T>(string cacheKey)
+        {
+            return (Page<T>)this._cache.GetCacheItem(cacheKey);
         }
 
         /// <summary>

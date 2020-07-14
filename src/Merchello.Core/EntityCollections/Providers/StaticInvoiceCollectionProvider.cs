@@ -220,5 +220,10 @@
                     sortBy,
                     sortDirection);
         }
+
+        protected override Page<KeyValuePair<Guid, int>> PerformGetPagedEntityKeyandSortOrders(long page, long itemsPerPage, string sortBy = "", SortDirection sortDirection = SortDirection.Ascending)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

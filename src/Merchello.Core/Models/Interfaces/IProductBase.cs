@@ -147,6 +147,7 @@
         /// Gets the detached contents.
         /// </summary>
         DetachedContentCollection<IProductVariantDetachedContent> DetachedContents { get; }
+        
     }
 
 }

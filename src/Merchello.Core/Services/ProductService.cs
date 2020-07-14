@@ -35,7 +35,7 @@ namespace Merchello.Core.Services
         /// <summary>
         /// The valid sort fields.
         /// </summary>
-        private static readonly string[] ValidSortFields = { "sku", "name", "price", "saleprice" };
+        private static readonly string[] ValidSortFields = { "sku", "name", "price", "saleprice", "sort" };
 
         /// <summary>
         /// The product variant service.
@@ -337,6 +337,24 @@ namespace Merchello.Core.Services
             }
 
             if (raiseEvents) Saved.RaiseEvent(new SaveEventArgs<IProduct>(productArray), this);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="collectionKey"></param>
+        /// <param name="products"></param>
+        public void SaveCollectionSortOrder(Guid collectionKey, IEnumerable<IProduct> products)
+        {
+            using (new WriteLock(Locker))
+            {
+                var uow = UowProvider.GetUnitOfWork();
+                using (var repository = RepositoryFactory.CreateProductRepository(uow))
+                {
+                    repository.SaveCollectionSortOrder(collectionKey, products);
+                    uow.Commit();
+                }                                
+            }
         }
 
         /// <summary>
@@ -975,6 +993,32 @@ namespace Merchello.Core.Services
             using (var repository = RepositoryFactory.CreateProductRepository(UowProvider.GetUnitOfWork()))
             {
                 return repository.GetKeysFromCollection(collectionKey, page, itemsPerPage, this.ValidateSortByField(sortBy), sortDirection);
+            }
+        }
+
+        internal Page<KeyValuePair<Guid,int>> GetKeyandSortOrdersFromCollection(
+            Guid collectionKey,
+            long page,
+            long itemsPerPage,
+            string sortBy = "",
+            SortDirection sortDirection = SortDirection.Descending)
+        {
+            using (var repository = RepositoryFactory.CreateProductRepository(UowProvider.GetUnitOfWork()))
+            {
+                return repository.GetKeyandSortOrdersFromCollection(collectionKey, page, itemsPerPage, this.ValidateSortByField(sortBy), sortDirection);
+            }
+        }
+
+        internal Page<KeyValuePair<Guid, int>> GetKeyandSortOrdersFromCollection(
+            Guid[] collectionKeys,
+            long page,
+            long itemsPerPage,
+            string sortBy = "",
+            SortDirection sortDirection = SortDirection.Descending)
+        {
+            using (var repository = RepositoryFactory.CreateProductRepository(UowProvider.GetUnitOfWork()))
+            {
+                return repository.GetKeyandSortOrdersFromCollection(collectionKeys, page, itemsPerPage, this.ValidateSortByField(sortBy), sortDirection);
             }
         }
 

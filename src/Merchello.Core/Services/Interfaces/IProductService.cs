@@ -67,6 +67,13 @@
         void Save(IEnumerable<IProduct> productList, bool raiseEvents = true);
 
         /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="collectionKey"></param>
+        /// <param name="productList"></param>
+        void SaveCollectionSortOrder(Guid collectionKey, IEnumerable<IProduct> productList);
+
+        /// <summary>
         /// Deletes a single <see cref="IProduct"/> object
         /// </summary>
         /// <param name="product"><see cref="IProduct"/> to delete</param>

@@ -468,6 +468,8 @@
             }
         }
 
+        public int Sort { get => _variant.Sort; set => _variant.Sort = value; }
+
         /// <inheritdoc/>
         internal IProductVariant MasterVariant
         {

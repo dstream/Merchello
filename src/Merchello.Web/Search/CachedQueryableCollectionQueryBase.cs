@@ -347,7 +347,48 @@
             return PagedKeyCache.CachePage(
                        cacheKey,
                        provider.GetPagedEntityKeys(page, itemsPerPage, sortBy, sortDirection));
-        } 
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="collectionKey"></param>
+        /// <param name="page"></param>
+        /// <param name="itemsPerPage"></param>
+        /// <param name="sortBy"></param>
+        /// <param name="sortDirection"></param>
+        /// <returns></returns>
+        protected Page<KeyValuePair<Guid,int>> GetCollectionPagedKeyandSortOrders(
+            Guid collectionKey,
+            long page,
+            long itemsPerPage,
+            string sortBy = "",
+            SortDirection sortDirection = SortDirection.Ascending)
+        {
+            var args = new Dictionary<string, string>
+                {
+                    { "collectionKey", collectionKey.ToString() }
+                };
+
+            var cacheKey = base.PagedKeyCache.GetPagedQueryCacheKey<CachedQueryableCollectionQueryBase<TEntity, TDisplay>>(
+               "GetFromCollection",
+               page,
+               itemsPerPage,
+               sortBy,
+               sortDirection,
+               args);
+
+            var pagedKeys = base.PagedKeyCache.GetPageByCacheKey<KeyValuePair<Guid, int>>(cacheKey);
+            if (pagedKeys != null)
+            {
+                return pagedKeys;
+            }            
+
+            var provider = this.GetEntityCollectionProvider(collectionKey);
+            return PagedKeyCache.CachePage<KeyValuePair<Guid, int>>(
+                       cacheKey,
+                       provider.GetPagedEntityKeyandSortOrders(page, itemsPerPage, sortBy, sortDirection));
+        }
 
         /// <summary>
         /// Builds the search term args.

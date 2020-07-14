@@ -246,6 +246,8 @@
             }
         }
 
+        public int Sort { get; set; }
+
         /// <inheritdoc/>
         [IgnoreDataMember]
         internal ProductAttributeCollection ProductAttributes

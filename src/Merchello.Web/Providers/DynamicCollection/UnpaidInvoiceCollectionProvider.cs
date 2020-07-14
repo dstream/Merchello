@@ -1,7 +1,7 @@
 ﻿namespace Merchello.Web.Providers.DynamicCollection
 {
     using System;
-
+    using System.Collections.Generic;
     using Merchello.Core;
     using Merchello.Core.EntityCollections;
     using Merchello.Core.Models;
@@ -67,6 +67,11 @@
         /// The <see cref="Page{IInvoice}"/>.
         /// </returns>
         protected override Page<IInvoice> PerformGetPagedEntities(long page, long itemsPerPage, string sortBy = "", SortDirection sortDirection = SortDirection.Ascending)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override Page<KeyValuePair<Guid, int>> PerformGetPagedEntityKeyandSortOrders(long page, long itemsPerPage, string sortBy = "", SortDirection sortDirection = SortDirection.Ascending)
         {
             throw new NotImplementedException();
         }

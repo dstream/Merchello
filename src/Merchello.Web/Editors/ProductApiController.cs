@@ -458,6 +458,28 @@
 
             var displayProduct = merchProduct.ToProductDisplay(DetachedValuesConversionType.Editor);
             return displayProduct;
+        } 
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [HttpPost, HttpPut]
+        public Guid PostProductSortOrder(ProductCollectionWithSortOrder model)
+        {        
+            if (model.Products.Any())
+            {                
+                var merchProducts = _productService.GetByKeys(model.Products.Select(c=>c.Key));
+                foreach (var p in merchProducts)
+                {
+                    var product = model.Products.FirstOrDefault(x => x.Key == p.Key);
+                    if (product != null)
+                        p.Sort = product.Sort;                    
+                }
+                _productService.SaveCollectionSortOrder(model.CollectionKey, merchProducts);
+            }            
+            return model.CollectionKey;
         }
 
         /// <summary>

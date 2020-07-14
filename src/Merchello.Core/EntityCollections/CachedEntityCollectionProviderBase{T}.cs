@@ -1,7 +1,7 @@
 ﻿namespace Merchello.Core.EntityCollections
 {
     using System;
-
+    using System.Collections.Generic;
     using Merchello.Core.Models.EntityBase;
     using Merchello.Core.Persistence.Querying;
 
@@ -58,6 +58,20 @@
         }
 
         /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="page"></param>
+        /// <param name="itemsPerPage"></param>
+        /// <param name="sortBy"></param>
+        /// <param name="sortDirection"></param>
+        /// <returns></returns>
+        public Page<KeyValuePair<Guid,int>> GetPagedEntityKeyandSortOrders(long page, long itemsPerPage, string sortBy = "", SortDirection sortDirection = SortDirection.Ascending)
+        {
+            return this.PerformGetPagedEntityKeyandSortOrders(page, itemsPerPage, sortBy, sortDirection);
+        }
+
+        /// <summary>
         /// The get paged entity keys.
         /// </summary>
         /// <param name="page">
@@ -76,6 +90,21 @@
         /// The <see cref="Page{Guid}"/>.
         /// </returns>
         protected abstract Page<Guid> PerformGetPagedEntityKeys(
+            long page,
+            long itemsPerPage,
+            string sortBy = "",
+            SortDirection sortDirection = SortDirection.Ascending);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="page"></param>
+        /// <param name="itemsPerPage"></param>
+        /// <param name="sortBy"></param>
+        /// <param name="sortDirection"></param>
+        /// <returns></returns>
+        protected abstract Page<KeyValuePair<Guid, int>> PerformGetPagedEntityKeyandSortOrders(
             long page,
             long itemsPerPage,
             string sortBy = "",

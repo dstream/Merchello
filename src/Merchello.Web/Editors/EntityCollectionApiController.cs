@@ -390,7 +390,7 @@
 
             var cachedQuery = this.GetCachedQueryByEntityType(entityType);
 
-            return term != null && !string.IsNullOrEmpty(term.Value)
+            var result = term != null && !string.IsNullOrEmpty(term.Value)
               ?
                cachedQuery.GetFromCollection(
                   key,
@@ -406,6 +406,14 @@
                   query.ItemsPerPage,
                   query.SortBy,
                   query.SortDirection);
+
+            if(entityType == EntityType.Product)
+            {
+                //merge order from Product2Collection table
+                
+            }
+
+            return result;
         }
 
         /// <summary>

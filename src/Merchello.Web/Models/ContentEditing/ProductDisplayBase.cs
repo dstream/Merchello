@@ -101,6 +101,6 @@
         /// <summary>
         /// Gets or sets the update date.
         /// </summary>
-        public DateTime UpdateDate { get; set; }
+        public DateTime UpdateDate { get; set; }        
     }
 }

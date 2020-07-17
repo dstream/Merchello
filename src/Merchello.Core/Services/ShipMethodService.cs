@@ -278,7 +278,7 @@
                     Query<IShipMethod>.Builder.Where(
                         x => x.ProviderKey == providerKey && x.ShipCountryKey == shipCountryKey);
 
-                return repository.GetByQuery(query);
+                return repository.GetByQuery(query).ToList();
             }
         }
 
@@ -299,7 +299,7 @@
                     Query<IShipMethod>.Builder.Where(
                         x => x.ProviderKey == providerKey);
 
-                return repository.GetByQuery(query);
+                return repository.GetByQuery(query).ToList();
             }
         }
 
@@ -313,7 +313,7 @@
         {
             using (var repository = RepositoryFactory.CreateShipMethodRepository(UowProvider.GetUnitOfWork()))
             {
-                return repository.GetAll();
+                return repository.GetAll().ToList();
             }
         }
 

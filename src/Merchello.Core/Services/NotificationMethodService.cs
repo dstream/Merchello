@@ -270,7 +270,7 @@ namespace Merchello.Core.Services
             {
                 var query = Query<INotificationMethod>.Builder.Where(x => x.ProviderKey == providerKey);
 
-                return repository.GetByQuery(query);
+                return repository.GetByQuery(query).ToList();
             }
         }
 
@@ -282,7 +282,7 @@ namespace Merchello.Core.Services
         {
             using (var repository = RepositoryFactory.CreateNotificationMethodRepository(UowProvider.GetUnitOfWork()))
             {
-                return repository.GetAll();
+                return repository.GetAll().ToList();
             }
         }
 

@@ -214,10 +214,19 @@
         /// The <see cref="ActionResult"/>.
         /// </returns>
         [HttpGet]
-        public virtual ActionResult Logout(int redirectId)
+        public virtual ActionResult Logout(int? redirectId, string redirectUrl)
         {
             Members.Logout();
-            return RedirectToUmbracoPage(redirectId);
+            Session.Clear();
+            if (redirectId != null && redirectId > 0)
+            {
+                return RedirectToUmbracoPage(redirectId.Value);
+            }
+            else if (!string.IsNullOrEmpty(redirectUrl))
+            {
+                return Redirect(redirectUrl);
+            }
+            return Redirect("/");
         }
 
         /// <summary>
@@ -400,23 +409,30 @@
 
 			var newPassword = Membership.GeneratePassword(Membership.MinRequiredPasswordLength, 0);
 			var user = Membership.GetUser(model.Username);
-			user.ChangePassword(newPassword, newPassword);
+            if (user.ChangePassword(newPassword, newPassword))
+            {
 
-			// assumes you have set the SMTP settings in web.config and supplied a default "from" email
-			var msg = new MailMessage
-			{
-				Subject = string.Format("New Password for {0}", Request.Url.Host),
-				Body = string.Format("Your new password is: {0}", newPassword),
-				IsBodyHtml = false
-			};
-			msg.To.Add(new MailAddress(model.Username));
-			using (var smtpClient = new SmtpClient())
-			{
-				smtpClient.Send(msg);
-			}
+                // assumes you have set the SMTP settings in web.config and supplied a default "from" email
+                var msg = new MailMessage
+                {
+                    Subject = string.Format("New Password for {0}", Request.Url.Host),
+                    Body = string.Format("Your new password is: {0}", newPassword),
+                    IsBodyHtml = false
+                };
+                msg.To.Add(new MailAddress(model.Username));
+                using (var smtpClient = new SmtpClient())
+                {
+                    smtpClient.Send(msg);
+                }
 
-			viewData.Success = true;
-			viewData.Messages = new[] { "A new password has been emailed to you." };
+                viewData.Success = true;
+                viewData.Messages = new[] { "A new password has been emailed to you." };
+            }
+            else
+            {
+                viewData.Success = false;
+                viewData.Messages = new[] { "Can't manually change password." };
+            }
 			ViewData["MerchelloViewData"] = viewData;
 			return CurrentUmbracoPage();
 		}

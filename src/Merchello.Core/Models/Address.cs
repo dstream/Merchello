@@ -20,6 +20,14 @@
 
         /// <inheritdoc/>
         [DataMember]
+        public string FirstName { get; set; }
+
+        /// <inheritdoc/>
+        [DataMember]
+        public string LastName { get; set; }
+
+        /// <inheritdoc/>
+        [DataMember]
         public string Address1 { get; set; }
 
         /// <inheritdoc/>

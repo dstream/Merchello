@@ -92,6 +92,8 @@ namespace Merchello.Core
             {
                 Label = label,
                 FullName = address.Name,
+                FirstName = address.FirstName,
+                LastName = address.LastName,
                 Address1 = address.Address1,
                 Address2 = address.Address2,
                 Locality = address.Locality,

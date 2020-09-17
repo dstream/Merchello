@@ -14,6 +14,18 @@
         string Name { get; set; }
 
         /// <summary>
+        /// Gets or sets the the first name
+        /// </summary>
+        [DataMember]
+        string FirstName { get; set; }
+
+        /// <summary>
+        /// Gets or sets the the last name
+        /// </summary>
+        [DataMember]
+        string LastName { get; set; }
+
+        /// <summary>
         /// Gets or sets the first address line
         /// </summary>
         [DataMember]

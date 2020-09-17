@@ -7,6 +7,8 @@ namespace Merchello.Tests.Base.DataMakers
     internal class AddressMock : IAddress
     {
         public string Name { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
         public string Address1 { get; set; }
         public string Address2 { get; set; }
         public string Locality { get; set; }
@@ -34,6 +36,8 @@ namespace Merchello.Tests.Base.DataMakers
             {
                 Label = label,
                 FullName = string.Format("{0} {1}", customer.FirstName, customer.LastName).Trim(),
+                FirstName = customer.FirstName,
+                LastName = customer.LastName,
                 Address1 = address.Address1,
                 Address2 = address.Address2,
                 Locality = address.Locality,

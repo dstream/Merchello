@@ -43,6 +43,20 @@
         public string FullName { get; set; }
 
         /// <summary>
+        /// Gets or sets the first name.
+        /// </summary>
+        [Column("firstName")]
+        [NullSetting(NullSetting = NullSettings.Null)]
+        public string FirstName { get; set; }
+
+        /// <summary>
+        /// Gets or sets the last name.
+        /// </summary>
+        [Column("lastName")]
+        [NullSetting(NullSetting = NullSettings.Null)]
+        public string LastName { get; set; }
+
+        /// <summary>
         /// Gets or sets the company.
         /// </summary>
         [Column("company")]

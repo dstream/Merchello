@@ -36,6 +36,10 @@
         /// </summary>
         private string _fullName;
 
+        private string _firstName;
+
+        private string _lastName;
+
         /// <summary>
         /// The company.
         /// </summary>
@@ -144,6 +148,36 @@
             set
             {
                 SetPropertyValueAndDetectChanges(value, ref _fullName, _ps.Value.FullNameSelector);
+            }
+        }
+
+        /// <inheritdoc/>
+        [DataMember]
+        public string FirstName
+        {
+            get
+            {
+                return _firstName;
+            }
+
+            set
+            {
+                SetPropertyValueAndDetectChanges(value, ref _firstName, _ps.Value.FirstNameSelector);
+            }
+        }
+
+        /// <inheritdoc/>
+        [DataMember]
+        public string LastName
+        {
+            get
+            {
+                return _lastName;
+            }
+
+            set
+            {
+                SetPropertyValueAndDetectChanges(value, ref _lastName, _ps.Value.LastNameSelector);
             }
         }
 
@@ -338,6 +372,10 @@
             /// The full name selector.
             /// </summary>
             public readonly PropertyInfo FullNameSelector = ExpressionHelper.GetPropertyInfo<CustomerAddress, string>(x => x.FullName);
+
+            public readonly PropertyInfo FirstNameSelector = ExpressionHelper.GetPropertyInfo<CustomerAddress, string>(x => x.FirstName);
+
+            public readonly PropertyInfo LastNameSelector = ExpressionHelper.GetPropertyInfo<CustomerAddress, string>(x => x.LastName);
 
             /// <summary>
             /// The company selector.

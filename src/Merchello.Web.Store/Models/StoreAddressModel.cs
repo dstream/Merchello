@@ -40,6 +40,20 @@
         public virtual string Name { get; set; }
 
         /// <summary>
+        /// Gets or sets the first name.
+        /// </summary>
+        [Display(ResourceType = typeof(StoreFormsResource), Name = "LabelFirstName")]
+        [Required(ErrorMessageResourceType = typeof(StoreFormsResource), ErrorMessageResourceName = "RequiredFirstName")]
+        public string FirstName { get; set; }
+
+        /// <summary>
+        /// Gets or sets the last name.
+        /// </summary>
+        [Display(ResourceType = typeof(StoreFormsResource), Name = "LabelLastName")]
+        [Required(ErrorMessageResourceType = typeof(StoreFormsResource), ErrorMessageResourceName = "RequiredLastName")]
+        public string LastName { get; set; }
+
+        /// <summary>
         /// Gets or sets the address line 1.
         /// </summary>
         [Display(ResourceType = typeof(StoreFormsResource), Name = "LabelAddress1")]

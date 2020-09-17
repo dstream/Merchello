@@ -31,6 +31,8 @@
             return new Address
                 {
                     Name = adr.Name,
+                    FirstName = adr.FirstName,
+                    LastName = adr.LastName,
                     Organization = adr.Organization,
                     Email = adr.Email,
                     Address1 = adr.Address1,
@@ -83,6 +85,8 @@
             var model = new TAddress
                 {
                     Name = adr.Name,
+                    FirstName = adr.FirstName,
+                    LastName = adr.LastName,
                     Organization = adr.Organization,
                     Email = adr.Email,
                     Address1 = adr.Address1,
@@ -114,7 +118,9 @@
         {
             var model = new TAddress
             {
-                Name = adr.FullName,
+                Name = adr.FullName, 
+                FirstName = adr.FirstName,
+                LastName = adr.LastName,
                 Organization = adr.Company,
                 Email = customer.Email,
                 Address1 = adr.Address1,

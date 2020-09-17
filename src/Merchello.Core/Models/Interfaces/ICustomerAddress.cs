@@ -25,8 +25,21 @@
         /// <summary>
         /// Gets or sets the full name for the address
         /// </summary>
+        [Obsolete("Use FirstName and LastName instead")]
         [DataMember]
         string FullName { get; set; }
+
+        /// <summary>
+        /// Gets or sets the first name for the address
+        /// </summary>
+        [DataMember]
+        string FirstName { get; set; }
+
+        /// <summary>
+        /// Gets or sets the last name for the address
+        /// </summary>
+        [DataMember]
+        string LastName { get; set; }
 
         /// <summary>
         /// Gets or sets company name for the address

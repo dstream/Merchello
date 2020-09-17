@@ -33,6 +33,8 @@
             CacheMap<CustomerAddress, CustomerAddressDto>(src => src.CustomerKey, dto => dto.CustomerKey);
             CacheMap<CustomerAddress, CustomerAddressDto>(src => src.Label, dto => dto.Label);
             CacheMap<CustomerAddress, CustomerAddressDto>(src => src.FullName, dto => dto.FullName);
+            CacheMap<CustomerAddress, CustomerAddressDto>(src => src.FirstName, dto => dto.FirstName);
+            CacheMap<CustomerAddress, CustomerAddressDto>(src => src.LastName, dto => dto.LastName);
             CacheMap<CustomerAddress, CustomerAddressDto>(src => src.Company, dto => dto.Company);
             CacheMap<CustomerAddress, CustomerAddressDto>(src => src.AddressTypeFieldKey, dto => dto.AddressTfKey);
             CacheMap<CustomerAddress, CustomerAddressDto>(src => src.Address1, dto => dto.Address1);

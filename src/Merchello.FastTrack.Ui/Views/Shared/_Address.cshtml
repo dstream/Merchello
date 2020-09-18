@@ -1,7 +1,7 @@
 ﻿@model Merchello.Core.Models.IAddress
     
 <div class="h-card">
-    <span class="p-name">@Model.Name</span>
+    <span class="p-name">@Model.FirstName @Model.LastName</span>
     @if (!Model.Organization.IsNullOrWhiteSpace())
     {<span class="p-org">@Model.Organization</span>}
     <p class="p-adr h-adr">

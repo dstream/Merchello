@@ -136,6 +136,8 @@
             var address = new TAddress
             {
                 Name = adr.Name, 
+                FirstName = adr.FirstName,
+                LastName = adr.LastName,
                 Organization = adr.Organization,
                 Address1 = adr.Address1,
                 Address2 = adr.Address2,

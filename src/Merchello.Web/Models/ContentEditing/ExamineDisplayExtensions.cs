@@ -118,6 +118,8 @@
                     CustomerKey = FieldAsGuid(result, "customerKey"),
                     VersionKey = FieldAsGuid(result, "versionKey"),
                     BillToName = FieldAsString(result, "billToName"),
+                    BillToFirstName = FieldAsString(result, "billToFirstName"),
+                    BillToLastName = FieldAsString(result, "billToLastName"),
                     BillToAddress1 = FieldAsString(result, "billToAddress1"),
                     BillToAddress2 = FieldAsString(result, "billToAddress2"),
                     BillToLocality = FieldAsString(result, "billToLocality"),

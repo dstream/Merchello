@@ -16,6 +16,8 @@
             this.ShippedDate = DateTime.Now;
             this.FromOrganization = origin.Organization;
             this.FromName = origin.Name;
+            this.FromFirstName = origin.FirstName;
+            this.FromLastName = origin.LastName;
             this.FromAddress1 = origin.Address1;
             this.FromAddress2 = origin.Address2;
             this.FromLocality = origin.Locality;
@@ -25,6 +27,8 @@
             this.FromIsCommercial = origin.IsCommercial;
             this.ToOrganization = destination.Organization;
             this.ToName = destination.Name;
+            this.ToFirstName = destination.FirstName;
+            this.ToLastName = destination.LastName;
             this.ToAddress1 = destination.Address1;
             this.ToAddress2 = destination.Address2;
             this.ToLocality = destination.Locality;
@@ -53,6 +57,10 @@
 
         public string FromName { get; set; }
 
+        public string FromFirstName { get; set; }
+
+        public string FromLastName { get; set; }
+
         public string FromAddress1 { get; set; }
 
         public string FromAddress2 { get; set; }
@@ -70,6 +78,10 @@
         public string ToOrganization { get; set; }
 
         public string ToName { get; set; }
+
+        public string ToFirstName { get; set; }
+
+        public string ToLastName { get; set; }
 
         public string ToAddress1 { get; set; }
 

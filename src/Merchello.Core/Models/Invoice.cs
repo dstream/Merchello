@@ -59,6 +59,16 @@
         private string _billToName;
 
         /// <summary>
+        /// The bill to first name.
+        /// </summary>
+        private string _billToFirstName;
+
+        /// <summary>
+        /// The bill to last name.
+        /// </summary>
+        private string _billToLastName;
+
+        /// <summary>
         /// The bill to address 1.
         /// </summary>
         private string _billToAddress1;
@@ -323,6 +333,36 @@
             set
             {
                 SetPropertyValueAndDetectChanges(value, ref _billToName, _ps.Value.BillToNameSelector);
+            }
+        }
+
+        /// <inheritdoc/>
+        [DataMember]
+        public string BillToFirstName
+        {
+            get
+            {
+                return _billToFirstName;
+            }
+
+            set
+            {
+                SetPropertyValueAndDetectChanges(value, ref _billToFirstName, _ps.Value.BillToFirstNameSelector);
+            }
+        }
+
+        /// <inheritdoc/>
+        [DataMember]
+        public string BillToLastName
+        {
+            get
+            {
+                return _billToLastName;
+            }
+
+            set
+            {
+                SetPropertyValueAndDetectChanges(value, ref _billToLastName, _ps.Value.BillToLastNameSelector);
             }
         }
 
@@ -638,6 +678,16 @@
             /// The bill to name selector.
             /// </summary>
             public readonly PropertyInfo BillToNameSelector = ExpressionHelper.GetPropertyInfo<Invoice, string>(x => x.BillToName);
+
+            /// <summary>
+            /// The bill to first name selector.
+            /// </summary>
+            public readonly PropertyInfo BillToFirstNameSelector = ExpressionHelper.GetPropertyInfo<Invoice, string>(x => x.BillToFirstName);
+
+            /// <summary>
+            /// The bill to last name selector.
+            /// </summary>
+            public readonly PropertyInfo BillToLastNameSelector = ExpressionHelper.GetPropertyInfo<Invoice, string>(x => x.BillToLastName);
 
             /// <summary>
             /// The bill to address 1 selector.

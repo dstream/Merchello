@@ -209,7 +209,9 @@ namespace Merchello.Web.Models.ContentEditing
 			destination.InvoiceStatus = invoiceDisplay.InvoiceStatus.ToInvoiceStatus();
 			destination.VersionKey = invoiceDisplay.VersionKey;
 			destination.BillToName = invoiceDisplay.BillToName;
-			destination.BillToAddress1 = invoiceDisplay.BillToAddress1;
+            destination.BillToFirstName = invoiceDisplay.BillToFirstName;
+            destination.BillToLastName = invoiceDisplay.BillToLastName;
+            destination.BillToAddress1 = invoiceDisplay.BillToAddress1;
 			destination.BillToAddress2 = invoiceDisplay.BillToAddress2;
 			destination.BillToLocality = invoiceDisplay.BillToLocality;
 			destination.BillToRegion = invoiceDisplay.BillToRegion;

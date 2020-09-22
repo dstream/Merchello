@@ -42,7 +42,18 @@
         /// <summary>
         /// Gets or sets the origin address's name for the Shipment
         /// </summary>
+        [Obsolete]
         string FromName { get; set; }
+
+        /// <summary>
+        /// Gets or sets the origin address's first name for the Shipment
+        /// </summary>
+        string FromFirstName { get; set; }
+
+        /// <summary>
+        /// Gets or sets the origin address's last name for the Shipment
+        /// </summary>
+        string FromLastName { get; set; }
 
         /// <summary>
         /// Gets or sets the origin address line 1 for the Shipment
@@ -87,7 +98,18 @@
         /// <summary>
         /// Gets or sets the destination address's name or company for the Shipment
         /// </summary>
+        [Obsolete]
         string ToName { get; set; }
+
+        /// <summary>
+        /// Gets or sets the destination address's first name or company for the Shipment
+        /// </summary>
+        string ToFirstName { get; set; }
+
+        /// <summary>
+        /// Gets or sets the destination address's last name or company for the Shipment
+        /// </summary>
+        string ToLastName { get; set; }
 
         /// <summary>
         /// Gets or sets the destination address line 1 for the Shipment

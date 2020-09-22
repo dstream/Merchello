@@ -56,8 +56,21 @@
         /// <summary>
         /// Gets or sets the full name to use for billing.  Generally copied from customer address.
         /// </summary>
+        [Obsolete("Use BillToFirstName and BillToLastName instead")]
         [DataMember]
         string BillToName { get; set; }
+
+        /// <summary>
+        /// Gets or sets the full name to use for billing.  Generally copied from customer address.
+        /// </summary>
+        [DataMember]
+        string BillToFirstName { get; set; }
+
+        /// <summary>
+        /// Gets or sets the full name to use for billing.  Generally copied from customer address.
+        /// </summary>
+        [DataMember]
+        string BillToLastName { get; set; }
 
         /// <summary>
         /// Gets or sets the address line 1 to use for billing.  Generally copied from customer address.

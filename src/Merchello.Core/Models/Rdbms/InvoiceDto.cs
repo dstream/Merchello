@@ -78,6 +78,20 @@
         public string BillToName { get; set; }
 
         /// <summary>
+        /// Gets or sets the bill to first name.
+        /// </summary>
+        [Column("billToFirstName")]
+        [NullSetting(NullSetting = NullSettings.Null)]
+        public string BillToFirstName { get; set; }
+
+        /// <summary>
+        /// Gets or sets the bill to last name.
+        /// </summary>
+        [Column("billToLastName")]
+        [NullSetting(NullSetting = NullSettings.Null)]
+        public string BillToLastName { get; set; }
+
+        /// <summary>
         /// Gets or sets the bill to address 1.
         /// </summary>
         [Column("billToAddress1")]

@@ -103,6 +103,8 @@ namespace Merchello.Core
         public static void SetBillingAddress(this IInvoice invoice, IAddress address)
         {
             invoice.BillToName = address.Name;
+            invoice.BillToFirstName = address.FirstName;
+            invoice.BillToLastName = address.LastName;
             invoice.BillToCompany = address.Organization;
             invoice.BillToAddress1 = address.Address1;
             invoice.BillToAddress2 = address.Address2;
@@ -126,6 +128,8 @@ namespace Merchello.Core
             return new Address()
             {
                 Name = invoice.BillToName,
+                FirstName = invoice.BillToFirstName,
+                LastName = invoice.BillToLastName,
                 Organization = invoice.BillToCompany,
                 Address1 = invoice.BillToAddress1,
                 Address2 = invoice.BillToAddress2,
@@ -181,6 +185,8 @@ namespace Merchello.Core
                 ReplaceablePattern.GetConfigurationReplaceablePattern("InvoiceNumber", invoice.PrefixedInvoiceNumber()),
                 ReplaceablePattern.GetConfigurationReplaceablePattern("InvoiceDate", invoice.InvoiceDate.FormatAsStoreDate()),
                 ReplaceablePattern.GetConfigurationReplaceablePattern("BillToName", invoice.BillToName),
+                ReplaceablePattern.GetConfigurationReplaceablePattern("BillToFirstName", invoice.BillToFirstName),
+                ReplaceablePattern.GetConfigurationReplaceablePattern("BillToLastName", invoice.BillToLastName),
                 ReplaceablePattern.GetConfigurationReplaceablePattern("BillToAddress1", invoice.BillToAddress1),
                 ReplaceablePattern.GetConfigurationReplaceablePattern("BillToAddress2", invoice.BillToAddress2),
                 ReplaceablePattern.GetConfigurationReplaceablePattern("BillToLocality", invoice.BillToLocality),

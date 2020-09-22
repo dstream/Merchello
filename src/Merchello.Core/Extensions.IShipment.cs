@@ -58,6 +58,8 @@ namespace Merchello.Core
             return new Address()
             {
                 Name = shipment.FromName,
+                FirstName = shipment.FromFirstName,
+                LastName = shipment.FromLastName,
                 Address1 = shipment.FromAddress1,
                 Address2 = shipment.FromAddress2,
                 Locality = shipment.FromLocality,
@@ -80,6 +82,8 @@ namespace Merchello.Core
             return new Address()
             {
                 Name = shipment.ToName,
+                FirstName = shipment.ToFirstName,
+                LastName = shipment.ToLastName,
                 Address1 = shipment.ToAddress1,
                 Address2 = shipment.ToAddress2,
                 Locality = shipment.ToLocality,
@@ -294,6 +298,8 @@ namespace Merchello.Core
                 ReplaceablePattern.GetConfigurationReplaceablePattern("ShippedDate", shipment.ShippedDate.FormatAsStoreDate()),
                 ReplaceablePattern.GetConfigurationReplaceablePattern("ShipToOrganization", shipment.ToOrganization),
                 ReplaceablePattern.GetConfigurationReplaceablePattern("ShipToName", shipment.ToName),
+                ReplaceablePattern.GetConfigurationReplaceablePattern("ShipToFirstName", shipment.ToFirstName),
+                ReplaceablePattern.GetConfigurationReplaceablePattern("ShipToLastName", shipment.ToLastName),
                 ReplaceablePattern.GetConfigurationReplaceablePattern("ShipToAddress1", shipment.ToAddress1),
                 ReplaceablePattern.GetConfigurationReplaceablePattern("ShipToAddress2", shipment.ToAddress2),
                 ReplaceablePattern.GetConfigurationReplaceablePattern("ShipToLocality", shipment.ToLocality),

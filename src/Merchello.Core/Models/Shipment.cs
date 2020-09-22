@@ -52,6 +52,16 @@
         private string _fromName;
 
         /// <summary>
+        /// From address first name.
+        /// </summary>
+        private string _fromFirstName;
+
+        /// <summary>
+        /// From address last name.
+        /// </summary>
+        private string _fromLastName;
+
+        /// <summary>
         /// From address 1.
         /// </summary>
         private string _fromAddress1;
@@ -95,6 +105,16 @@
         /// To address name.
         /// </summary>
         private string _toName;
+
+        /// <summary>
+        /// To address first name.
+        /// </summary>
+        private string _toFirstName;
+
+        /// <summary>
+        /// To address last name.
+        /// </summary>
+        private string _toLastName;
 
         /// <summary>
         /// To address 1.
@@ -221,6 +241,8 @@
             _shippedDate = DateTime.Now;
             _fromOrganization = origin.Organization;
             _fromName = origin.Name;
+            _fromFirstName = origin.FirstName;
+            _fromLastName = origin.LastName;
             _fromAddress1 = origin.Address1;
             _fromAddress2 = origin.Address2;
             _fromLocality = origin.Locality;
@@ -230,6 +252,8 @@
             _fromIsCommercial = origin.IsCommercial;
             _toOrganization = destination.Organization;
             _toName = destination.Name;
+            _toFirstName = destination.FirstName;
+            _toLastName = destination.LastName;
             _toAddress1 = destination.Address1;
             _toAddress2 = destination.Address2;
             _toLocality = destination.Locality;
@@ -342,6 +366,36 @@
             set
             {
                 SetPropertyValueAndDetectChanges(value, ref _fromName, _ps.Value.FromNameSelector);
+            }
+        }
+
+        /// <inheritdoc/>
+        [DataMember]
+        public string FromFirstName
+        {
+            get
+            {
+                return _fromFirstName;
+            }
+
+            set
+            {
+                SetPropertyValueAndDetectChanges(value, ref _fromFirstName, _ps.Value.FromFirstNameSelector);
+            }
+        }
+
+        /// <inheritdoc/>
+        [DataMember]
+        public string FromLastName
+        {
+            get
+            {
+                return _fromLastName;
+            }
+
+            set
+            {
+                SetPropertyValueAndDetectChanges(value, ref _fromLastName, _ps.Value.FromLastNameSelector);
             }
         }
 
@@ -477,6 +531,36 @@
             set
             {
                 SetPropertyValueAndDetectChanges(value, ref _toName, _ps.Value.ToNameSelector);
+            }
+        }
+
+        /// <inheritdoc/>
+        [DataMember]
+        public string ToFirstName
+        {
+            get
+            {
+                return _toFirstName;
+            }
+
+            set
+            {
+                SetPropertyValueAndDetectChanges(value, ref _toFirstName, _ps.Value.ToFirstNameSelector);
+            }
+        }
+
+        /// <inheritdoc/>
+        [DataMember]
+        public string ToLastName
+        {
+            get
+            {
+                return _toLastName;
+            }
+
+            set
+            {
+                SetPropertyValueAndDetectChanges(value, ref _toLastName, _ps.Value.ToLastNameSelector);
             }
         }
 
@@ -738,6 +822,16 @@
             public readonly PropertyInfo FromNameSelector = ExpressionHelper.GetPropertyInfo<Shipment, string>(x => x.FromName);
 
             /// <summary>
+            /// The from first name selector.
+            /// </summary>
+            public readonly PropertyInfo FromFirstNameSelector = ExpressionHelper.GetPropertyInfo<Shipment, string>(x => x.FromFirstName);
+
+            /// <summary>
+            /// The from last name selector.
+            /// </summary>
+            public readonly PropertyInfo FromLastNameSelector = ExpressionHelper.GetPropertyInfo<Shipment, string>(x => x.FromLastName);
+
+            /// <summary>
             /// The from address 1 selector.
             /// </summary>
             public readonly PropertyInfo FromAddress1Selector = ExpressionHelper.GetPropertyInfo<Shipment, string>(x => x.FromAddress1);
@@ -781,6 +875,16 @@
             /// The to name selector.
             /// </summary>
             public readonly PropertyInfo ToNameSelector = ExpressionHelper.GetPropertyInfo<Shipment, string>(x => x.ToName);
+
+            /// <summary>
+            /// The to first name selector.
+            /// </summary>
+            public readonly PropertyInfo ToFirstNameSelector = ExpressionHelper.GetPropertyInfo<Shipment, string>(x => x.ToFirstName);
+
+            /// <summary>
+            /// The to last name selector.
+            /// </summary>
+            public readonly PropertyInfo ToLastNameSelector = ExpressionHelper.GetPropertyInfo<Shipment, string>(x => x.ToLastName);
 
             /// <summary>
             /// The to address 1 selector.

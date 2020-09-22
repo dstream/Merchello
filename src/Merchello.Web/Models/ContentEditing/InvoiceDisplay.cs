@@ -62,6 +62,16 @@
         public string BillToName { get; set; }
 
         /// <summary>
+        /// Gets or sets the bill to first name.
+        /// </summary>
+        public string BillToFirstName { get; set; }
+
+        /// <summary>
+        /// Gets or sets the bill to last name.
+        /// </summary>
+        public string BillToLastName { get; set; }
+
+        /// <summary>
         /// Gets or sets the bill to address 1.
         /// </summary>
         public string BillToAddress1 { get; set; }
@@ -168,6 +178,8 @@
         public static void SetBillingAddress(this InvoiceDisplay invoice, IAddress address)
         {
             invoice.BillToName = address.Name;
+            invoice.BillToFirstName = address.FirstName;
+            invoice.BillToLastName = address.LastName;
             invoice.BillToCompany = address.Organization;
             invoice.BillToAddress1 = address.Address1;
             invoice.BillToAddress2 = address.Address2;
@@ -191,6 +203,8 @@
             return new Address()
             {
                 Name = invoice.BillToName,
+                FirstName = invoice.BillToFirstName,
+                LastName = invoice.BillToLastName,
                 Organization = invoice.BillToCompany,
                 Address1 = invoice.BillToAddress1,
                 Address2 = invoice.BillToAddress2,

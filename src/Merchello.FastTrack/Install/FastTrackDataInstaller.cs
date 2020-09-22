@@ -118,6 +118,9 @@
             MultiLogHelper.Info<FastTrackDataInstaller>("Starting to add example FastTrack data");
             this.AddMerchelloData();
 
+            MultiLogHelper.Info<FastTrackDataInstaller>("Starting to update database schema");
+            this.UpdateDatabaseSchema();
+
             // Adds the example Umbraco data
             MultiLogHelper.Info<FastTrackDataInstaller>("Starting to add example Merchello Umbraco data");
             return this.AddUmbracoData();
@@ -759,6 +762,37 @@
             }
 
             MerchelloContext.Current.Services.ProductService.Save(product, false);
+        }
+
+        private void UpdateDatabaseSchema()
+        {
+            try
+            {
+                var db = ApplicationContext.Current.DatabaseContext.Database;
+                db.Execute(
+                    @"ALTER TABLE merchCustomerAddress
+                    ADD 
+                        firstName nvarchar(255) NULL,
+                        lastName nvarchar(255) NULL "
+                    );
+
+                MultiLogHelper.Info<FastTrackDataInstaller>("Added 'firstName' and 'lastName' Columns To merchCustomerAddress Table");
+
+                db.Execute(
+                    @"ALTER TABLE merchInvoice
+                    ADD 
+                        billToFirstName nvarchar(255) NULL,
+                        billToLastName nvarchar(255) NULL"
+                    );
+
+                MultiLogHelper.Info<FastTrackDataInstaller>("Added 'billToFirstName' and 'billToLastName' Columns To merchInvoice Table");
+
+
+            }
+            catch (Exception ex)
+            {
+                MultiLogHelper.Info<FastTrackDataInstaller>("Error while Adding  'firstName' and 'lastName' Columns To merchCustomerAddress Table:" + ex.Message);
+            }
         }
     }
 }

@@ -202,13 +202,13 @@
             TBillingAddress model = null;
 
             // Determine if we already have an address saved in the checkout manager
-            //var address = CheckoutManager.Customer.GetBillToAddress();
-            //if (address != null)
-            //{
-            //    model = BillingAddressFactory.Create(address);
-            //}
-            //else
-            //{
+            var address = CheckoutManager.Customer.GetBillToAddress();
+            if (address != null)
+            {
+                model = BillingAddressFactory.Create(address);
+            }
+            else
+            {
                 // If not and the we have the configuration set to use the customer's default customer billing address
                 // This can only be done if the customer is logged in.  e.g. Not an anonymous customer
                 if (!this.CurrentCustomer.IsAnonymous && this._useCustomerAddress)
@@ -216,7 +216,7 @@
                     var defaultBilling = ((ICustomer)this.CurrentCustomer).DefaultCustomerAddress(AddressType.Billing);
                     if (defaultBilling != null) model = BillingAddressFactory.Create((ICustomer)CurrentCustomer, defaultBilling);
                 }
-            //}
+            }
 
             // If the model is still null at this point, we need to generate a default model
             // for the country drop down list
@@ -245,13 +245,13 @@
             TShippingAddress model = null;
 
             // Determine if we already have an address saved in the checkout manager
-            //var address = CheckoutManager.Customer.GetShipToAddress();
-            //if (address != null)
-            //{
-            //    model = ShippingAddressFactory.Create(address);
-            //}
-            //else
-            //{
+            var address = CheckoutManager.Customer.GetShipToAddress();
+            if (address != null)
+            {
+                model = ShippingAddressFactory.Create(address);
+            }
+            else
+            {
                 // If not and the we have the configuration set to use the customer's default customer shipping address
                 // This can only be done if the customer is logged in.  e.g. Not an anonymous customer
                 if (!this.CurrentCustomer.IsAnonymous && this._useCustomerAddress)
@@ -259,7 +259,7 @@
                     var defaultShipping = ((ICustomer)this.CurrentCustomer).DefaultCustomerAddress(AddressType.Shipping);
                     if (defaultShipping != null) model = ShippingAddressFactory.Create((ICustomer)CurrentCustomer, defaultShipping);
                 }
-            //}
+            }
 
             // If the model is still null at this point, we need to generate a default model
             // for the country drop down list

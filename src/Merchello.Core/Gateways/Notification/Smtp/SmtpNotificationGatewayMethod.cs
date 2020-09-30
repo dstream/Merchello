@@ -66,7 +66,9 @@
         /// </param>
         public override void PerformSend(IFormattedNotificationMessage message, IEnumerable<Attachment> attachments = null)
         {
-            if (!message.Recipients.Any()) return;
+            if ((message.Recipients == null || !message.Recipients.Any()) &&
+                (message.CustomerRecipients == null || !message.CustomerRecipients.Any())) 
+                return;
 
             using (var msg = new MailMessage
             {
@@ -78,12 +80,42 @@
             {
                 LogHelper.Info<SmtpNotificationGatewayMethod>("Sending an email to " + string.Join(", ", message.Recipients));
 
-                foreach (var to in message.Recipients)
+                if (message.CustomerRecipients != null)
                 {
-                    if (!string.IsNullOrEmpty(to))
+                    foreach (var to in message.CustomerRecipients)
                     {
-                        msg.To.Add(new MailAddress(to));
+                        if (!string.IsNullOrEmpty(to))
+                        {
+                            msg.To.Add(new MailAddress(to));
+                        }
                     }
+
+                    //bcc to CMS admins
+                    if (message.Recipients != null)
+                    {
+                        foreach (var to in message.Recipients)
+                        {
+                            if (!string.IsNullOrEmpty(to))
+                            {
+                                msg.Bcc.Add(new MailAddress(to));
+                            }
+                        }
+                    }
+                }        
+                else if (message.Recipients != null)                
+                {
+                    foreach (var to in message.Recipients)
+                    {
+                        if (!string.IsNullOrEmpty(to))
+                        {
+                            msg.To.Add(new MailAddress(to));
+                        }
+                    }
+                }
+
+                //reply to
+                if (!string.IsNullOrEmpty(message.ReplyTo)) {
+                    msg.ReplyToList.Add(new MailAddress(message.ReplyTo));
                 }
 
                 if (attachments != null)

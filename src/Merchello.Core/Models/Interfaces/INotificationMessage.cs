@@ -56,9 +56,14 @@
         bool BodyTextIsFilePath { get; set; }
 
         /// <summary>
-        /// Gets or sets the recipients of the notification
+        /// Gets or sets the recipients (cms admin) of the notification
         /// </summary>
         string Recipients { get; set; }
+
+        /// <summary>
+        /// Gets or sets the bcc recipients of the notification
+        /// </summary>
+        string CustomerRecipients { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether or not this notification should be sent to the customer

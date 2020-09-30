@@ -71,6 +71,11 @@
         private string _recipients;
 
         /// <summary>
+        /// 
+        /// </summary>
+        private string _customerRecipients;
+
+        /// <summary>
         /// The send to customer.
         /// </summary>
         private bool _sendToCustomer;
@@ -253,6 +258,21 @@
 
         /// <inheritdoc/>
         [DataMember]
+        public string CustomerRecipients
+        {
+            get
+            {
+                return _customerRecipients;
+            }
+
+            set
+            {
+                SetPropertyValueAndDetectChanges(value, ref _customerRecipients, _ps.Value.CustomerRecipientsSelector);
+            }
+        }
+
+        /// <inheritdoc/>
+        [DataMember]
         public bool SendToCustomer
         {
             get
@@ -336,6 +356,11 @@
             /// The recipients selector.
             /// </summary>
             public readonly PropertyInfo RecipientsSelector = ExpressionHelper.GetPropertyInfo<NotificationMessage, string>(x => x.Recipients);
+
+            /// <summary>
+            /// The recipients selector.
+            /// </summary>
+            public readonly PropertyInfo CustomerRecipientsSelector = ExpressionHelper.GetPropertyInfo<NotificationMessage, string>(x => x.CustomerRecipients);
 
             /// <summary>
             /// The send to customer selector.

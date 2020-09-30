@@ -31,6 +31,9 @@
         /// </summary>
         private readonly List<string> _recipients = new List<string>();
 
+
+        private readonly List<string> _customerRecipients = new List<string>();
+
         /// <summary>
         /// The formatted message.
         /// </summary>
@@ -90,6 +93,11 @@
             get { return _recipients; }
         }
 
+        public IEnumerable<string> CustomerRecipients
+        {
+            get { return _customerRecipients; }
+        }
+
         /// <summary>
         /// Gets a value indicating whether the notification should also be sent to the customer
         /// </summary>
@@ -123,7 +131,7 @@
                            ? FormatStatus.Truncated
                            : FormatStatus.Ok;
             }
-        }
+        }        
 
         /// <summary>
         /// Gets the <see cref="INotificationMessage"/>
@@ -179,6 +187,9 @@
 
             var tos = _notificationMessage.Recipients.Replace(',', ';');
             _recipients.AddRange(tos.Split(';').Select(x => x.Trim()));
+
+            tos = _notificationMessage.CustomerRecipients.Replace(',', ';');
+            _customerRecipients.AddRange(tos.Split(';').Select(x => x.Trim()));
         }
     }
 }

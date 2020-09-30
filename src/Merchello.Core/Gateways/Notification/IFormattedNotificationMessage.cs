@@ -25,12 +25,20 @@
         string Name { get; set; }
 
         /// <summary>
-        /// Gets a list of recipients for the notification.
+        /// Gets a list of CMS admin recipients for the notification. Bcc these emails
         /// </summary>
         /// <remarks>
         /// This could be email addresses, mailing addresses, mobile numbers
         /// </remarks>
         IEnumerable<string> Recipients { get; }
+
+        /// <summary>
+        /// Gets a list of recipients for the notification. Send to these emails
+        /// </summary>
+        /// <remarks>
+        /// This could be email addresses, mailing addresses, mobile numbers
+        /// </remarks>
+        IEnumerable<string> CustomerRecipients { get; }
 
         /// <summary>
         /// Gets a value indicating whether the notification should also be sent to the customer

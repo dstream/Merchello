@@ -40,16 +40,16 @@
 
             foreach (var message in Messages)
             {
+                // add the additional contacts to the recipients list
+                if (!message.Recipients.EndsWith(";"))
+                    message.Recipients += ";";
+
+                if (message.Recipients[0] == ';')
+                    message.Recipients = message.Recipients.TrimStart(';');
+
                 if (value.Contacts.Any() && message.SendToCustomer)
-                {
-                    // add the additional contacts to the recipients list
-                    if (!message.Recipients.EndsWith(";"))
-                        message.Recipients += ";";
-
-                    if (message.Recipients[0] == ';')
-                        message.Recipients = message.Recipients.TrimStart(';');
-
-                    message.Recipients = string.Format("{0}{1}", message.Recipients, string.Join(";", value.Contacts));
+                {                                                          
+                    message.CustomerRecipients = string.Join(";", value.Contacts);                    
                 }
 
                 // send the message
